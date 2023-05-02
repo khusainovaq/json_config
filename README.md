@@ -1,5 +1,5 @@
 ## Introduction
-This is a simple Flask application that allows users to upload and manage configuration files.
+This is a Flask application that allows users to upload and manage configuration files.
 
 ## Requirements
 - Python 3

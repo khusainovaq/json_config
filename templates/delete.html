@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Config {{ config.name }}</title>
+</head>
+<body>
+    <h1>{{ config.name }}</h1>
+    <p>{{ config.description }}</p>
+    <form action="/configs/{{ config._id }}" method="POST">
+      <input type="hidden" name="_method" value="DELETE">
+      <button type="submit">Delete</button>
+    </form>
+</body>
+</html>

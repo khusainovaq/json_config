@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Configs</title>
+</head>
+<body>
+    <h1>Configs</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for config in configs %}
+                <tr>
+                    <td>{{ config.name }}</td>
+                    <td>{{ config.description }}</td>
+                    <td>
+                        <form id="deleteForm_{{ config._id }}" action="/configs/{{ config._id }}" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit">Delete</button>
+                        </form>
+                        <script>
+                            const deleteForm = document.querySelector('#deleteForm_{{ config._id }}');
+                            deleteForm.addEventListener('submit', function(event) {
+                                event.preventDefault();
+                                fetch(event.target.action, {
+                                    method: 'DELETE',
+                                })
+                                .then(response => {
+                                    if (response.ok) {
+                                        window.location.reload();
+                                    } else {
+                                        alert('Failed to delete config');
+                                    }
+                                })
+                                .catch(error => {
+                                    alert('Failed to delete config');
+                                });
+                            });
+                        </script>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+
+<!--
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Configs</title>
+</head>
+<body>
+    <h1>Configs</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for config in configs %}
+          <tr>
+            <td>{{ config.name }}</td>
+            <td>{{ config.description }}</td>
+            <td>
+              <form action="/configs/{{ config._id }}" method="POST">
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit">Delete</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</body>
+</html>
+
+-->

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Config Store</title>
+</head>
+<body>
+    <a href="/configs">View configs</a>
+    <h1>Config Store</h1>
+    <h2>Upload Config</h2>
+    <div class="container">
+  <form id="myForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name"><br>
+
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" rows="10" cols="50"></textarea><br>
+
+    <button type="submit">Send</button>
+  </form>
+</div>
+    <script>
+      const myForm = document.querySelector('#myForm');
+
+      myForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Отменяем действие по умолчанию
+
+        const formData = {
+          name: document.querySelector('#name').value,
+          description: document.querySelector('#description').value
+        };
+
+        fetch('/upload', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        })
+        .then(response => {
+          if (response.ok) {
+            // Если данные успешно добавлены в базу, перезагружаем страницу
+            window.location.reload();
+          } else {
+            // Если что-то пошло не так, выводим сообщение об ошибке
+            alert('Произошла ошибка при добавлении конфигурации.');
+          }
+        })
+        .catch(error => {
+          alert('Произошла ошибка при отправке запроса на сервер.');
+        });
+      });
+    </script>
+</body>
+</html>

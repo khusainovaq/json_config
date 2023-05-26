@@ -32,6 +32,7 @@ Method: GET
 Response
 Renders the configuration list template and a list of all configurations.
 /configs/<config_id>
+
 Request
 Method: GET
 URL Parameter: <config_id> (the ID of the configuration to be retrieved)
